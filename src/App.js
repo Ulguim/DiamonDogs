@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Navbar from './components/Navbar'
+import Register from './components/Register';
+import List_dogs from './components/List_dogs';
+import Dogfile from "./components/Dogfile";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Details from './components/Details';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 
 function App() {
+
+  const notify = ()=>{
+ 
+    // Calling toast method by passing string
+    toast('Hello Geeks')
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      
+      <Router>
+    
+        <Navbar />
+        
+        <Route path="/register" exact>
+        <Register />
+        </Route>
+        <Switch>
+          <Route path="/" exact>
+            <List_dogs />
+          </Route>
+          <Route path="/details/:id">
+            <Details/>
+          </Route>
+        </Switch>
+      </Router>
+
   );
 }
 
